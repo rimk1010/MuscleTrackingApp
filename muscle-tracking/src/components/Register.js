@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import User from './User';
 
-const Login = () => {
+const Register = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [errMsg, setErrMsg] = useState();
@@ -11,11 +11,11 @@ const Login = () => {
 
     const click = () => {
         try{
-            User.login(email,password).then((loginState) => {
-               if(loginState) {
-                   history.push('/list1');
+            User.register(email,password).then((registerState) => {
+               if(registerState) {
+                   history.push('/registerd');
                }else {
-                   setErrMsg('入力情報に誤りがあります')
+                   setErrMsg('入力情報に誤りがあります');
                }
             });
         }catch(e) {
@@ -35,7 +35,7 @@ const Login = () => {
             <Row className='justify-content-md-center'>
                 <Form>
                     {errMsg && (<Alert variant='danger'>{errMsg}</Alert>)}
-                    <h2>ログイン</h2>
+                    <h2>新規登録</h2>
                     <Form.Group controlId='email'>
                         <Form.Label>メールアドレス</Form.Label>
                         <Form.Control type='email' placeholder='Enter your Email' onChange={handleChangeEmail} value={email}/>
@@ -44,10 +44,11 @@ const Login = () => {
                         <Form.Label>パスワード</Form.Label>
                         <Form.Control type='password' placeholder='Enter your Password' onChange={handleChangePassword} value={password}/>
                     </Form.Group>
-                    <Button variant='primary' type='button' onClick={click}>ログイン</Button>
+                    <Button variant='primary' type='button' onClick={click}>REGISTER</Button>
                 </Form>
             </Row>
         </Container>
     );
 }
-export default Login;
+
+export default Register;

@@ -1,10 +1,10 @@
 class User {
     isLoggedIn = () => this.get('isLoggedIn') === 'true';
-  
+
     set = (key, value) => localStorage.setItem(key, value);
-  
+
     get = key => this.getLocalStorage(key);
-  
+
     getLocalStorage = key => {
       const ret = localStorage.getItem(key);
       if (ret) {
@@ -12,28 +12,26 @@ class User {
       }
       return null;
     };
-  
+
+    register = async (email, password) => {
+      if(email === undefined || password === undefined){
+        return false;
+      }
+      return true;
+    }
+
     login = async (email, password) => {
-  
-      // ログイン処理
-      // ログインエラー時には、falseを返してもいいし、returnを別の用途で利用したかったら
-      // 例外を出しして呼び出し元でcatchしてもいいかと思います。
-  
+      if(email === undefined || password === undefined){
+        return false;
+      }
       this.set('isLoggedIn', true);
-  
       return true;
     };
-  
+
     logout = async () => {
       if (this.isLoggedIn()) {
         this.set('isLoggedIn', false);
-  
-        // ログアウト処理
-        //　他に必要な処理があるのならこちら
-  
       }
     };
   }
-  
   export default new User();
-  

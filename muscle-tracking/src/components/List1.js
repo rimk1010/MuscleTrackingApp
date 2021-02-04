@@ -7,12 +7,13 @@ const List1 = () => {
     const click = () => {
         history.push('/logout');
     }
-    return(
-        <div>
-            <Container className='center'>Hello Login List1</Container>
+    return (
+        <div className='text-center'>
+            <Container className='center'>
+                <h1>MuscleTrackingへようこそ！</h1>
+            </Container>
             <Button variant='primary' type='button' onClick={click}>ログアウト</Button>
         </div>
-        
     )
 }
 
