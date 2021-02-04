@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
 import { withRouter, useHistory } from 'react-router-dom';
 import User from './User';
+import firebase from 'firebase';
 
 const Login = () => {
     const [email, setEmail] = useState();
@@ -13,7 +14,13 @@ const Login = () => {
         try{
             User.login(email,password).then((loginState) => {
                if(loginState) {
-                   history.push('/list1');
+                   firebase.auth().signInWithEmailAndPassword(email, password)
+                   .then(res => {
+                    history.push('/list1');
+                   })
+                   .catch(error => {
+                       setErrMsg(error.message);
+                   })
                }else {
                    setErrMsg('入力情報に誤りがあります')
                }

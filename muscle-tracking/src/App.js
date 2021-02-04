@@ -7,7 +7,6 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Auth from './components/Auth';
-import User from './components/User';
 import List1 from './components/List1';
 import List2 from './components/List2';
 import Registerd from './components/Registerd';

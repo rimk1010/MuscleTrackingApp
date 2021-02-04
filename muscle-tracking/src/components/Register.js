@@ -3,6 +3,11 @@ import { Form, Button, Container, Row, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import User from './User';
 
+import firebase from 'firebase';
+import firebaseConfig from '../config/firebase';
+
+firebase.initializeApp(firebaseConfig);
+
 const Register = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -14,6 +19,15 @@ const Register = () => {
             User.register(email,password).then((registerState) => {
                if(registerState) {
                    history.push('/registerd');
+                   firebase.auth().createUserWithEmailAndPassword(email, password)
+                   .then(user => {
+                       console.log(user);
+                       setEmail('');
+                       setPassword('');
+                   })
+                   .catch(error=> {
+                    setErrMsg(error.message);
+                   })
                }else {
                    setErrMsg('入力情報に誤りがあります');
                }
